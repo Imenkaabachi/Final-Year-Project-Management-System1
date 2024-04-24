@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Professor } from './professor.entity';
+import { Section } from "./section.enum";
 
 @Entity('student')
 export class StudentEntity {
@@ -25,4 +27,11 @@ export class StudentEntity {
 
     @Column({ length: 7 })
     inscriptionNumber: string;
+
+    @Column({ type: 'enum', enum: Section }) // Add section column
+    section: Section; // Each student belongs to one section
+
+
+    @ManyToOne(() => Professor, professor => professor.students)
+    supervisor: Professor;
 }

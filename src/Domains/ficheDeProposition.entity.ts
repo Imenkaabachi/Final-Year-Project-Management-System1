@@ -1,5 +1,5 @@
-import { StudentEntity } from 'src/Student/entity/student.entity';
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from 'typeorm';
+import { StudentEntity } from 'src/Domains/student.entity';
+import { Entity, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
 
 @Entity('ficheDeProposition')
 export class ficheDeProposition {
