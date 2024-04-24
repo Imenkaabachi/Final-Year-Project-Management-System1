@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 @Entity('entreprise')
 export class Entreprise {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: ObjectId;
 
   @Column()
   nomEntreprise: string;
@@ -19,6 +20,4 @@ export class Entreprise {
 
   @Column()
   adresseEmailEncadrant: string;
-
-  
 }

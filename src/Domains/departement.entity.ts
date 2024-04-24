@@ -1,10 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ObjectIdColumn, OneToOne } from 'typeorm';
 import { Professor } from './professor.entity';
+import { ObjectId } from 'mongodb';
 
 @Entity('department')
 export class Department {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: ObjectId;
 
   @Column()
   name: string;

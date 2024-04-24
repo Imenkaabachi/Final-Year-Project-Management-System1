@@ -1,12 +1,13 @@
 import { StudentEntity } from 'src/Domains/student.entity';
-import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, JoinColumn, ObjectIdColumn, OneToOne } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 @Entity('demandeConfidentialite')
 export class demandeConfidentialite {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ObjectIdColumn()
+  id: ObjectId;
 
-    @OneToOne(() => StudentEntity, { nullable: true })
-    @JoinColumn()
-    student: StudentEntity;
+  @OneToOne(() => StudentEntity, { nullable: true })
+  @JoinColumn()
+  student: StudentEntity;
 }

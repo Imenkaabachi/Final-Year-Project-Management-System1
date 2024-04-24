@@ -3,16 +3,17 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  ObjectIdColumn,
   OneToOne,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { StudentEntity } from './student.entity';
 import { Entreprise } from './entreprise.entity';
+import { ObjectId } from 'mongodb';
 
 @Entity('pfe')
 export class PFE {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: ObjectId;
 
   @Column()
   sujet: string;

@@ -1,12 +1,13 @@
 import { StudentEntity } from 'src/Domains/student.entity';
-import { Entity, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
+import { Entity, JoinColumn, ObjectIdColumn, OneToOne } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 @Entity('avenant')
 export class avenant {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ObjectIdColumn()
+  id: ObjectId;
 
-    @OneToOne(() => StudentEntity, { nullable: true })
-    @JoinColumn()
+  @OneToOne(() => StudentEntity, { nullable: true })
+  @JoinColumn()
   student: StudentEntity;
 }

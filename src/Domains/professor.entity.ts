@@ -1,11 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Section } from "./section.enum";
-import { StudentEntity } from "./student.entity";
+import { Column, Entity, ObjectIdColumn, OneToMany } from 'typeorm';
+import { Section } from './section.enum';
+import { StudentEntity } from './student.entity';
+import { ObjectId } from 'mongodb';
 
-@Entity('professor')
+@Entity()
 export class Professor {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  id: ObjectId;
 
   @Column()
   name: string;
@@ -16,7 +17,6 @@ export class Professor {
   @Column()
   sections: Section[];
 
-  @OneToMany(() => StudentEntity, student => student.supervisor)
+  @OneToMany(() => StudentEntity, (student) => student.supervisor)
   students: StudentEntity[];
-
 }
