@@ -15,6 +15,10 @@ import { demandeConfidentialite } from './Domains/demandeConfidentialite.entity'
 import { demandeAnnulation } from './Domains/demandeAnnulation.entity';
 import { convention } from './Domains/convention.entity';
 import { avenant } from './Domains/avenant.entity';
+import { AdminService } from './api/admin/admin.service';
+import { UserController } from './api/user/user.controller';
+import { UserService } from './api/user/user.service';
+import { UserModule } from './api/user/user.module';
 
 @Module({
   imports: [
@@ -46,8 +50,9 @@ import { avenant } from './Domains/avenant.entity';
       useNewUrlParser: true,
     }),
     TypeOrmModule.forFeature([StudentEntity]),
+    UserModule,
   ],
-  controllers: [AppController, StudentController],
-  providers: [AppService, StudentService],
+  controllers: [AppController, StudentController, UserController],
+  providers: [AppService, StudentService, AdminService, UserService],
 })
 export class AppModule {}

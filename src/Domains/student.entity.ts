@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Professor } from './professor.entity';
 import { Section } from './section.enum';
 
+
 @Entity()
 export class StudentEntity {
   // @ObjectIdColumn()
