@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { Professor } from '../../Domains/professor.entity';
 import { ProfessorService } from './professor.service';
+import { ObjectId } from 'typeorm';
 
 @Controller('professor')
 export class ProfessorController {
@@ -25,20 +26,20 @@ export class ProfessorController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Professor> {
+  async findOne(@Param('id') id: ObjectId): Promise<Professor> {
     return this.professorsService.findOne(id);
   }
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: ObjectId,
     @Body() professor: Professor,
   ): Promise<Professor> {
     return this.professorsService.update(id, professor);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<void> {
+  async remove(@Param('id') id: ObjectId): Promise<void> {
     return this.professorsService.remove(id);
   }
 }

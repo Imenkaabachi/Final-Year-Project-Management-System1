@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { StudentEntity } from '../../Domains/student.entity';
-import { Repository } from 'typeorm';
+import { ObjectId, Repository } from 'typeorm';
 import { StudentDto } from './dto/student.dto';
 
 @Injectable()
@@ -20,19 +20,19 @@ export class StudentService {
     return await this.studentRepository.find();
   }
 
-  async findOne(id: string): Promise<StudentEntity> {
+  async findOne(id: ObjectId): Promise<StudentEntity> {
     return await this.studentRepository.findOneBy({ id });
   }
 
   async update(
-    id: string,
+    id: ObjectId,
     studentData: Partial<StudentEntity>,
   ): Promise<StudentEntity> {
     await this.studentRepository.update(id, studentData);
     return await this.studentRepository.findOneBy({ id });
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: ObjectId): Promise<void> {
     await this.studentRepository.delete(id);
   }
 }

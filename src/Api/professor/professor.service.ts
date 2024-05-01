@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Professor } from '../../Domains/professor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class ProfessorService {
@@ -18,16 +19,16 @@ export class ProfessorService {
     return this.professorRepository.find();
   }
 
-  async findOne(id: string): Promise<Professor> {
+  async findOne(id: ObjectId): Promise<Professor> {
     return this.professorRepository.findOneBy({ id });
   }
 
-  async update(id: string, professor: Professor): Promise<Professor> {
+  async update(id: ObjectId, professor: Professor): Promise<Professor> {
     await this.professorRepository.update(id, professor);
     return this.professorRepository.findOneBy({ id });
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: ObjectId): Promise<void> {
     await this.professorRepository.delete(id);
   }
 }

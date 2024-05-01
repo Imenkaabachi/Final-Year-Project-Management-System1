@@ -19,23 +19,22 @@ import { AdminService } from './api/admin/admin.service';
 import { UserController } from './api/user/user.controller';
 import { UserService } from './api/user/user.service';
 import { UserModule } from './api/user/user.module';
+import { UserEntity } from './Domains/user.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './strategy/passport-jwt.strategy';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      host: '127.0.0.1',
+      host: 'localhost',
       port: 27017,
       database: 'pfeMS',
       synchronize: false,
-      // entities: [
-      //   'build/**/**.entity.js',
-      //   '**/**.entity.js',
-      //   'src/**/**.entity.js',
-      // ],
       entities: [
-        Professor,
         StudentEntity,
+        Professor,
         PFE,
         LettreAffectation,
         ficheDeProposition,
@@ -45,14 +44,20 @@ import { UserModule } from './api/user/user.module';
         demandeAnnulation,
         convention,
         avenant,
+        UserEntity
       ],
       useUnifiedTopology: true,
       useNewUrlParser: true,
     }),
-    TypeOrmModule.forFeature([StudentEntity]),
+    ConfigModule.forRoot(),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'default-secret-key', // Use environment variable or default key
+      signOptions: { expiresIn: '1d' }, 
+    }),
+    TypeOrmModule.forFeature([StudentEntity, UserEntity]),
     UserModule,
   ],
   controllers: [AppController, StudentController, UserController],
-  providers: [AppService, StudentService, AdminService, UserService],
+  providers: [AppService, StudentService, AdminService, UserService, JwtStrategy, ConfigService],
 })
 export class AppModule {}

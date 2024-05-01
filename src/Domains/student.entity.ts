@@ -1,13 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, ObjectId, PrimaryGeneratedColumn } from 'typeorm';
 import { Professor } from './professor.entity';
 import { Section } from './section.enum';
 
 
 @Entity()
 export class StudentEntity {
-  // @ObjectIdColumn()
   @PrimaryGeneratedColumn()
-  id: string;
+  id: ObjectId;
 
   @Column({ unique: true })
   email: string;

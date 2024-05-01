@@ -10,6 +10,7 @@ import {
 import { StudentDto } from './dto/student.dto';
 import { StudentEntity } from '../../Domains/student.entity';
 import { StudentService } from './student.service';
+import { ObjectId } from 'typeorm';
 
 @Controller('student')
 export class StudentController {
@@ -26,20 +27,20 @@ export class StudentController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<StudentEntity> {
+  async findOne(@Param('id') id: ObjectId): Promise<StudentEntity> {
     return await this.studentService.findOne(id);
   }
 
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: ObjectId,
     @Body() studentData: Partial<StudentEntity>,
   ): Promise<StudentEntity> {
     return await this.studentService.update(id, studentData);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<void> {
+  async remove(@Param('id') id: ObjectId): Promise<void> {
     await this.studentService.remove(id);
   }
 }

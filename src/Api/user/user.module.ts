@@ -7,11 +7,13 @@ import { JwtModule } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
 import { UserEntity } from 'src/Domains/user.entity';
 import { JwtStrategy } from 'src/strategy/passport-jwt.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 
 dotenv.config();
 @Module({
   imports: [
+    ConfigModule,
     TypeOrmModule.forFeature([UserEntity]),
     PassportModule.register({
       defaultStrategy: 'jwt'
