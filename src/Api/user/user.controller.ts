@@ -1,8 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { Body, Get, Post } from '@nestjs/common';
-import { User } from 'src/Domains/user.schema';
 import { LoginCredentialsDto } from './dto/LoginCredentials.dto';
 import { UserService } from './user.service';
+import { User } from "../../Domains/user.schema";
 
 @Controller('user')
 export class UserController {
@@ -19,7 +19,7 @@ export class UserController {
     }
 
     @Get('all')
-    findAll(): Promise<UserEntity[]> {
+    findAll(): Promise<User[]> {
         return this.userService.findAll();
     }
 }
