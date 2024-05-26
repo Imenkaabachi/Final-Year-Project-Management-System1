@@ -8,7 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { StudentDto } from './dto/student.dto';
-import { StudentEntity } from '../../Domains/student.entity';
+import { Student } from '../../Domains/student.schema';
 import { StudentService } from './student.service';
 import { ObjectId } from 'typeorm';
 
@@ -17,25 +17,25 @@ export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   @Post()
-  async create(@Body() studentDto: StudentDto): Promise<StudentEntity> {
+  async create(@Body() studentDto: StudentDto): Promise<Student> {
     return await this.studentService.create(studentDto);
   }
 
   @Get()
-  async findAll(): Promise<StudentEntity[]> {
+  async findAll(): Promise<Student[]> {
     return await this.studentService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: ObjectId): Promise<StudentEntity> {
+  async findOne(@Param('id') id: ObjectId): Promise<Student> {
     return await this.studentService.findOne(id);
   }
 
   @Patch(':id')
   async update(
     @Param('id') id: ObjectId,
-    @Body() studentData: Partial<StudentEntity>,
-  ): Promise<StudentEntity> {
+    @Body() studentData: Partial<Student>,
+  ): Promise<Student> {
     return await this.studentService.update(id, studentData);
   }
 

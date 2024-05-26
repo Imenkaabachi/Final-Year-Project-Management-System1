@@ -1,6 +1,6 @@
 import { ArrayNotEmpty, IsArray, IsEmail, IsNotEmpty } from 'class-validator';
 import { Section } from '../../../Domains/section.enum';
-import { StudentEntity } from '../../../Domains/student.entity';
+import { Student } from '../../../Domains/student.schema';
 
 export class ProfessorDto {
   @IsNotEmpty()
@@ -15,5 +15,5 @@ export class ProfessorDto {
   @ArrayNotEmpty()
   sections: Section[];
 
-  students: StudentEntity[];
+  students: Student[];
 }

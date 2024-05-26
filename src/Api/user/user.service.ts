@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/Domains/user.entity';
+import { UserEntity } from 'src/Domains/user.schema';
 import { Repository } from 'typeorm';
 import { LoginCredentialsDto } from './dto/LoginCredentials.dto';
 import * as bcrypt from 'bcrypt';

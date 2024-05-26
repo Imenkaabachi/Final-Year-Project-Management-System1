@@ -7,9 +7,9 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { Professor } from '../../Domains/professor.entity';
+import { Professor } from '../../Domains/professor.schema';
 import { ProfessorService } from './professor.service';
-import { ObjectId } from 'typeorm';
+import { Types } from 'mongoose';
 
 @Controller('professor')
 export class ProfessorController {
@@ -17,29 +17,29 @@ export class ProfessorController {
 
   @Post()
   async create(@Body() professor: Professor): Promise<Professor> {
-    return this.professorsService.create(professor);
+    return await this.professorsService.create(professor);
   }
 
   @Get()
   async findAll(): Promise<Professor[]> {
-    return this.professorsService.findAll();
+    return await this.professorsService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: ObjectId): Promise<Professor> {
-    return this.professorsService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<Professor> {
+    return await this.professorsService.findOne(Types.ObjectId(id));
   }
 
   @Put(':id')
   async update(
-    @Param('id') id: ObjectId,
+    @Param('id') id: string,
     @Body() professor: Professor,
   ): Promise<Professor> {
-    return this.professorsService.update(id, professor);
+    return await this.professorsService.update(Types.ObjectId(id), professor);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: ObjectId): Promise<void> {
-    return this.professorsService.remove(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    return await this.professorsService.remove(Types.ObjectId(id));
   }
 }

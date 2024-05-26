@@ -1,34 +1,35 @@
 import { Injectable } from '@nestjs/common';
-import { Professor } from '../../Domains/professor.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Professor, ProfessorDocument } from '../../Domains/professor.schema';
 import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class ProfessorService {
   constructor(
-    @InjectRepository(Professor)
-    private readonly professorRepository: Repository<Professor>,
+    @InjectModel(Professor.name)
+    private readonly professorModel: Model<ProfessorDocument>,
   ) {}
 
   async create(professor: Professor): Promise<Professor> {
-    return this.professorRepository.save(professor);
+    const createdProfessor = new this.professorModel(professor);
+    return await createdProfessor.save();
   }
 
   async findAll(): Promise<Professor[]> {
-    return this.professorRepository.find();
+    return await this.professorModel.find().exec();
   }
 
   async findOne(id: ObjectId): Promise<Professor> {
-    return this.professorRepository.findOneBy({ id });
+    return await this.professorModel.findById(id).exec();
   }
 
   async update(id: ObjectId, professor: Professor): Promise<Professor> {
-    await this.professorRepository.update(id, professor);
-    return this.professorRepository.findOneBy({ id });
+    await this.professorModel.findByIdAndUpdate(id, professor).exec();
+    return await this.findOne(id);
   }
 
   async remove(id: ObjectId): Promise<void> {
-    await this.professorRepository.delete(id);
+    await this.professorModel.findByIdAndDelete(id).exec();
   }
 }
