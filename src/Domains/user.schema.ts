@@ -6,23 +6,23 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
-    @Prop()
-    email: string;
+  @Prop()
+  email: string;
 
-    @Prop()
-    username: string;
+  @Prop()
+  username: string;
 
-    @Prop()
-    password: string;
+  @Prop()
+  password: string;
 
-    @Prop()
-    salt: string;
+  @Prop()
+  salt: string;
 
-    @Prop({
+  @Prop({
     type: 'enum',
-    enum: UserRoleEnum
-    })
-    role: string;
+    enum: UserRoleEnum,
+  })
+  role: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
