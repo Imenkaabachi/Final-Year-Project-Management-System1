@@ -1,9 +1,0 @@
-{
-    "type": "mongodb",
-    "host": "localhost",
-    "port": 27017,
-    "database": "your_database_name",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
-    "synchronize": true
-  }
-  
