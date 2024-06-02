@@ -1,22 +1,14 @@
 import { Controller } from '@nestjs/common';
-import { Body, Get, Post } from '@nestjs/common';
-import { LoginCredentialsDto } from './dto/LoginCredentials.dto';
+import { Get } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from "../../Domains/user.schema";
 
 @Controller('user')
 export class UserController {
     constructor(
-        private userService: UserService
+        private readonly userService: UserService
     ) {}
 
-
-    @Post('login')
-    login(
-    @Body() credentials: LoginCredentialsDto
-    ) {
-        return this.userService.login(credentials);
-    }
 
     @Get('all')
     findAll(): Promise<User[]> {

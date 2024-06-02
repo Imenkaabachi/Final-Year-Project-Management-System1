@@ -1,15 +1,22 @@
 import { Professor } from './professor.schema';
+import { Section } from './section.enum';
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+
+
+export type DepartementDocument = HydratedDocument<Departement>;
 
 @Schema()
-export class Department {
+export class Departement {
 
-  @Prop()
-  name: string;
+  @Prop([String])
+  sections: Section[];
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Professor'})
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Professor' })
   director: Professor;
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Professor' }] })
+  professors: Professor[];
 }
 
-export const DepartementSchema = SchemaFactory.createForClass(Department);
+export const DepartementSchema = SchemaFactory.createForClass(Departement);

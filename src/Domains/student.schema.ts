@@ -1,37 +1,30 @@
-import { Professor } from './professor.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+import { User } from "./user.schema";
 import { Section } from './section.enum';
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose, { HydratedDocument } from 'mongoose';
 
 export type StudentDocument = HydratedDocument<Student>;
+
 @Schema()
-export class Student {
+export class Student extends User {
 
-  @Prop({ unique: true })
-  email: string;
-
-  @Prop()
-  name: string;
-
-  @Prop()
-  firstName: string;
-
-  @Prop({ length: 8 })
+  @Prop({ maxlength: 8 })
   cin: string;
 
-  @Prop({ length: 8 })
+  @Prop({ maxlength: 8 })
   phone: string;
 
-  @Prop({ type: 'date' })
+  @Prop({ type: Date })
   dateOfBirth: Date;
 
-  @Prop({ length: 7 })
+  @Prop({ maxlength: 7 })
   inscriptionNumber: string;
 
-  @Prop({ type: 'enum', enum: Section }) // Add section column
-  section: Section; // Each student belongs to one section
+  @Prop({ type: String, enum: Section })
+  section: Section;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Professor' })
-  supervisor: mongoose.Types.ObjectId | Professor;
+  @Prop()
+  pfeId: string;
 }
-export  const StudentSchema = SchemaFactory.createForClass(Student);
+
+export const StudentSchema = SchemaFactory.createForClass(Student);

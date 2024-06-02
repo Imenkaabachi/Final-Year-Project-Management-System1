@@ -3,12 +3,12 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
 
 
-export type DemandeConfidentialiteDocument = HydratedDocument<demandeConfidentialite>;
+export type DemandeConfidentialiteDocument = HydratedDocument<DemandeConfidentialite>;
 @Schema()
-export class demandeConfidentialite {
+export class DemandeConfidentialite {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Student'})
   student: Student;
 }
 
-export const DemandeConfidentialiteSchema = SchemaFactory.createForClass(demandeConfidentialite);
+export const DemandeConfidentialiteSchema = SchemaFactory.createForClass(DemandeConfidentialite);

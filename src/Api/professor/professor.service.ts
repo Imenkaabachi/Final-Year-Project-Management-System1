@@ -32,4 +32,9 @@ export class ProfessorService {
   async remove(id: ObjectId): Promise<void> {
     await this.professorModel.findByIdAndDelete(id).exec();
   }
+
+
+  findByEmail(email : string){
+    return this.professorModel.findOne({email : email},{password: 0, salt : 0},{populate : ["instruments"]})
+  }
 }

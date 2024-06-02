@@ -2,12 +2,12 @@ import { Student} from 'src/Domains/student.schema';
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
 
-export type ficheDePropositionDocument = HydratedDocument<ficheDeProposition>;
+export type ficheDePropositionDocument = HydratedDocument<FicheDeProposition>;
 @Schema()
-export class ficheDeProposition {
+export class FicheDeProposition {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Student'})
   student: Student;
 }
 
-export const ficheDePropositionSchema = SchemaFactory.createForClass(ficheDeProposition);
+export const FicheDePropositionSchema = SchemaFactory.createForClass(FicheDeProposition);

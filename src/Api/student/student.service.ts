@@ -36,4 +36,8 @@ export class StudentService {
   async remove(id: ObjectId): Promise<void> {
     await this.studentModel.findByIdAndDelete(id).exec();
   }
+
+  findStudent(email :string){
+    return this.studentModel.findOne({email : email}, {password: 0, salt : 0},{populate : ["instruments"]})
+  }
 }

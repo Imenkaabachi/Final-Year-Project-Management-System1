@@ -27,7 +27,7 @@ export class ProfessorController {
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Professor> {
-    return await this.professorsService.findOne(Types.ObjectId(id));
+    return await this.professorsService.findOne(new Types.ObjectId(id));
   }
 
   @Put(':id')
@@ -35,11 +35,11 @@ export class ProfessorController {
     @Param('id') id: string,
     @Body() professor: Professor,
   ): Promise<Professor> {
-    return await this.professorsService.update(Types.ObjectId(id), professor);
+    return await this.professorsService.update( new Types.ObjectId(id), professor);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<void> {
-    return await this.professorsService.remove(Types.ObjectId(id));
+    return await this.professorsService.remove(new Types.ObjectId(id));
   }
 }

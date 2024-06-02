@@ -1,14 +1,14 @@
 import { Student } from 'src/Domains/student.schema';
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose, { HydratedDocument } from "mongoose";
+import { HydratedDocument, Types } from "mongoose";
 
-export type AvenantDocument = HydratedDocument<avenant>;
+export type AvenantDocument = HydratedDocument<Avenant>;
 @Schema()
-export class avenant {
+export class Avenant {
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Student' , nullable: true})
+  @Prop({ type: Types.ObjectId, ref: 'Student' , nullable: true})
 
   student: Student;
 }
 
-export const AvenantSchema = SchemaFactory.createForClass(avenant);
+export const AvenantSchema = SchemaFactory.createForClass(Avenant);
